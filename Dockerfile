@@ -5,8 +5,8 @@ WORKDIR /app
 # copy files
 COPY . .
 
-# install dependencies (if any)
-RUN pip install --no-cache-dir -r requirements.txt || true
+# install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# default command (you can change this)
-CMD ["python3", "scripts/last30days.py", "AI trends"]
+# run with uvicorn on Railway's dynamic port
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
